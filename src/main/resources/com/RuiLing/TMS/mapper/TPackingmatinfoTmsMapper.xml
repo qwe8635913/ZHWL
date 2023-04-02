@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.RuiLing.TMS.mapper.TPackingmatinfoTmsMapper">
+<!--    <resultMap id="BaseResultMap" type="com.RuiLing.TMS.entity.TPackingmatinfoTms">
+        &lt;!&ndash;@mbg.generated&ndash;&gt;
+        &lt;!&ndash;@Table T_PACKINGMATINFO_TMS&ndash;&gt;
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="CAR_NO" jdbcType="VARCHAR" property="carNo"/>
+        <result column="TRANSFER_TYPE_CODE" jdbcType="DECIMAL" property="transferTypeCode"/>
+        <result column="DRIVER" jdbcType="VARCHAR" property="driver"/>
+        <result column="DRIVER_PHONE" jdbcType="VARCHAR" property="driverPhone"/>
+        <result column="TRANSFERSTATION_ID" jdbcType="DECIMAL" property="transferstationId"/>
+        <result column="WGT" jdbcType="DECIMAL" property="wgt"/>
+        <result column="COUNT" jdbcType="DECIMAL" property="count"/>
+        <result column="RECIVER" jdbcType="VARCHAR" property="reciver"/>
+        <result column="RECIVER_PHONE" jdbcType="VARCHAR" property="reciverPhone"/>
+        <result column="REC_REVISOR" jdbcType="VARCHAR" property="recRevisor"/>
+        <result column="REC_REVISOR_TIME" jdbcType="TIMESTAMP" property="recRevisorTime"/>
+        <result column="VERSION_ID" jdbcType="DECIMAL" property="versionId"/>
+        <result column="STATUS" jdbcType="DECIMAL" property="status"/>
+        <result column="N_TRANSFERSTATION_ID" jdbcType="DECIMAL" property="nTransferstationId"/>
+        <result column="CHECKOUT_TIME" jdbcType="TIMESTAMP" property="checkoutTime"/>
+        <result column="REC_CREATOR" jdbcType="VARCHAR" property="recCreator"/>
+        <result column="REC_CREATOR_TIME" jdbcType="TIMESTAMP" property="recCreatorTime"/>
+        <result column="GO_OUT" jdbcType="VARCHAR" property="goOut"/>
+    </resultMap>-->
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        ID                   "id",
+        CAR_NO               "carNo",
+        TRANSFER_TYPE_CODE   "transferTypeCode",
+        DRIVER               "driver",
+        DRIVER_PHONE         "driverPhone",
+        TRANSFERSTATION_ID   "transferstationId",
+        WGT                  "wgt",
+        COUNT                "count",
+        RECIVER              "reciver",
+        RECIVER_PHONE        "reciverPhone",
+        REC_REVISOR          "recRevisor",
+        REC_REVISOR_TIME     "recRevisorTime",
+        VERSION_ID           "versionId",
+        STATUS               "status",
+        N_TRANSFERSTATION_ID "nTransferstationId",
+        TO_CHAR(CHECKOUT_TIME,'yyyy-MM-dd')       "checkoutTime",
+        REC_CREATOR          recCreator,
+        REC_CREATOR_TIME     "recCreatorTime",
+        GO_OUT               "goOut"
+    </sql>
+    <select id="selectPackingmatinfoTms" parameterType="java.lang.String" resultType="java.util.LinkedHashMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from T_PACKINGMATINFO_TMS
+        <!--    where ID = #{id,jdbcType=VARCHAR}-->
+    </select>
+    <delete id="deletePackingmatinfoTms">
+        <!--@mbg.generated-->
+        delete
+        from T_PACKINGMATINFO_TMS
+        where ID in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            <!--separator:循环的分隔符-->
+            #{id,jdbcType=VARCHAR}
+        </foreach>
+    </delete>
+    <insert id="insertPackingmatinfoTms" parameterType="com.RuiLing.TMS.entity.TPackingmatinfoTms">
+        <!--@mbg.generated-->
+        insert into T_PACKINGMATINFO_TMS (ID, CAR_NO, TRANSFER_TYPE_CODE,
+                                          DRIVER, DRIVER_PHONE, TRANSFERSTATION_ID,
+                                          WGT, COUNT, RECIVER,
+                                          RECIVER_PHONE,
+                                          VERSION_ID, STATUS, N_TRANSFERSTATION_ID,
+                                          CHECKOUT_TIME, REC_CREATOR, REC_CREATOR_TIME,
+                                          GO_OUT)
+        values (#{id,jdbcType=VARCHAR}, #{carNo,jdbcType=VARCHAR}, #{transferTypeCode,jdbcType=DECIMAL},
+                #{driver,jdbcType=VARCHAR}, #{driverPhone,jdbcType=VARCHAR}, #{transferstationId,jdbcType=DECIMAL},
+                #{wgt,jdbcType=DECIMAL}, #{count,jdbcType=DECIMAL}, #{reciver,jdbcType=VARCHAR},
+                #{reciverPhone,jdbcType=VARCHAR}, 1
+                , #{status,jdbcType=DECIMAL}, #{nTransferstationId,jdbcType=DECIMAL},
+                #{checkoutTime,jdbcType=TIMESTAMP}, #{recCreator,jdbcType=VARCHAR},
+                sysdate,
+                #{goOut,jdbcType=VARCHAR})
+    </insert>
+    <update id="updatePackingmatinfoTms" parameterType="com.RuiLing.TMS.entity.TPackingmatinfoTms">
+        <!--@mbg.generated-->
+        update T_PACKINGMATINFO_TMS
+        set CAR_NO               = #{carNo,jdbcType=VARCHAR},
+            TRANSFER_TYPE_CODE   = #{transferTypeCode,jdbcType=DECIMAL},
+            DRIVER               = #{driver,jdbcType=VARCHAR},
+            DRIVER_PHONE         = #{driverPhone,jdbcType=VARCHAR},
+            TRANSFERSTATION_ID   = #{transferstationId,jdbcType=DECIMAL},
+            WGT                  = #{wgt,jdbcType=DECIMAL},
+            COUNT                = #{count,jdbcType=DECIMAL},
+            RECIVER              = #{reciver,jdbcType=VARCHAR},
+            RECIVER_PHONE        = #{reciverPhone,jdbcType=VARCHAR},
+            REC_REVISOR          = #{recRevisor,jdbcType=VARCHAR},
+            REC_REVISOR_TIME     = sysdate,
+            VERSION_ID           = VERSION_ID+1,
+            STATUS               = #{status,jdbcType=DECIMAL},
+            N_TRANSFERSTATION_ID = #{nTransferstationId,jdbcType=DECIMAL},
+            CHECKOUT_TIME        = #{checkoutTime,jdbcType=TIMESTAMP},
+            GO_OUT               = #{goOut,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

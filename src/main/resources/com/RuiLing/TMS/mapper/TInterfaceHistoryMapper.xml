@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.RuiLing.TMS.mapper.TInterfaceHistoryMapper">
+    <resultMap id="BaseResultMap" type="com.RuiLing.TMS.entity.TInterfaceHistory">
+        <!--@mbg.generated-->
+        <!--@Table T_INTERFACE_HISTORY-->
+        <id column="ID" jdbcType="DECIMAL" property="id"/>
+        <result column="API_NAME" jdbcType="VARCHAR" property="apiName"/>
+        <result column="REQUEST_METHOD" jdbcType="VARCHAR" property="requestMethod"/>
+        <result column="REQUEST_URL" jdbcType="VARCHAR" property="requestUrl"/>
+        <result column="REQUEST_IP" jdbcType="VARCHAR" property="requestIp"/>
+        <result column="REQUEST_TIME" jdbcType="TIMESTAMP" property="requestTime"/>
+        <result column="REQUEST_STATUS_CODE" jdbcType="DECIMAL" property="requestStatusCode"/>
+        <result column="REQUEST_PARAMS" jdbcType="VARCHAR" property="requestParams"/>
+        <result column="REQUEST_RESULT" jdbcType="VARCHAR" property="requestResult"/>
+        <result column="ERROR_MSG" jdbcType="VARCHAR" property="errorMsg"/>
+        <result column="LOG_LEVEL" jdbcType="VARCHAR" property="logLevel"/>
+        <result column="USER_ID" jdbcType="DECIMAL" property="userId"/>
+        <result column="USER_NAME" jdbcType="VARCHAR" property="userName"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        ID                    "id",
+        API_NAME               "apiName",
+        REQUEST_METHOD         "requestMethod",
+        REQUEST_URL           "requestUrl",
+        REQUEST_IP           "requestIp",
+        REQUEST_TIME         "requestTime",
+        REQUEST_STATUS_CODE   "requestStatusCode",
+        REQUEST_PARAMS        "requestParams",
+        REQUEST_RESULT        "requestResult",
+        ERROR_MSG          "errorMsg" ,
+        LOG_LEVEL            "logLevel",
+        USER_ID               "userId",
+        USER_NAME            "userName",
+        CREATE_TIME             "createTime"
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from T_INTERFACE_HISTORY
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+    <!--  查询履历列表-->
+    <select id="queryTInterfaceHistory" resultType="java.util.LinkedHashMap">
+        select
+        <include refid="Base_Column_List"/>
+        from T_INTERFACE_HISTORY
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+        <!--@mbg.generated-->
+        delete
+        from T_INTERFACE_HISTORY
+        where ID = #{id,jdbcType=DECIMAL}
+    </delete>
+    <insert id="insert" parameterType="com.RuiLing.TMS.entity.TInterfaceHistory">
+        <!--@mbg.generated-->
+        insert into T_INTERFACE_HISTORY (ID, API_NAME, REQUEST_METHOD,
+                                         REQUEST_URL, REQUEST_IP, REQUEST_TIME,
+                                         REQUEST_STATUS_CODE, REQUEST_PARAMS, REQUEST_RESULT,
+                                         ERROR_MSG, LOG_LEVEL, USER_ID,
+                                         USER_NAME, CREATE_TIME)
+        values (#{id,jdbcType=DECIMAL}, #{apiName,jdbcType=VARCHAR}, #{requestMethod,jdbcType=VARCHAR},
+                #{requestUrl,jdbcType=VARCHAR}, #{requestIp,jdbcType=VARCHAR}, #{requestTime,jdbcType=TIMESTAMP},
+                #{requestStatusCode,jdbcType=DECIMAL}, #{requestParams,jdbcType=VARCHAR},
+                #{requestResult,jdbcType=VARCHAR},
+                #{errorMsg,jdbcType=VARCHAR}, #{logLevel,jdbcType=VARCHAR}, #{userId,jdbcType=DECIMAL},
+                #{userName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.RuiLing.TMS.entity.TInterfaceHistory">
+        <!--@mbg.generated-->
+        insert into T_INTERFACE_HISTORY
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="apiName != null">
+                API_NAME,
+            </if>
+            <if test="requestMethod != null">
+                REQUEST_METHOD,
+            </if>
+            <if test="requestUrl != null">
+                REQUEST_URL,
+            </if>
+            <if test="requestIp != null">
+                REQUEST_IP,
+            </if>
+            <if test="requestTime != null">
+                REQUEST_TIME,
+            </if>
+            <if test="requestStatusCode != null">
+                REQUEST_STATUS_CODE,
+            </if>
+            <if test="requestParams != null">
+                REQUEST_PARAMS,
+            </if>
+            <if test="requestResult != null">
+                REQUEST_RESULT,
+            </if>
+            <if test="errorMsg != null">
+                ERROR_MSG,
+            </if>
+            <if test="logLevel != null">
+                LOG_LEVEL,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="userName != null">
+                USER_NAME,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="apiName != null">
+                #{apiName,jdbcType=VARCHAR},
+            </if>
+            <if test="requestMethod != null">
+                #{requestMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="requestUrl != null">
+                #{requestUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="requestIp != null">
+                #{requestIp,jdbcType=VARCHAR},
+            </if>
+            <if test="requestTime != null">
+                #{requestTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="requestStatusCode != null">
+                #{requestStatusCode,jdbcType=DECIMAL},
+            </if>
+            <if test="requestParams != null">
+                #{requestParams,jdbcType=VARCHAR},
+            </if>
+            <if test="requestResult != null">
+                #{requestResult,jdbcType=VARCHAR},
+            </if>
+            <if test="errorMsg != null">
+                #{errorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="logLevel != null">
+                #{logLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=DECIMAL},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+<!--    新增履历-->
+    <insert id="insertHistory">
+        insert into T_INTERFACE_HISTORY (ID, API_NAME, REQUEST_METHOD,
+        REQUEST_URL, REQUEST_IP, REQUEST_TIME,
+        REQUEST_STATUS_CODE, REQUEST_PARAMS, REQUEST_RESULT,
+        ERROR_MSG, LOG_LEVEL, USER_ID,
+        USER_NAME, CREATE_TIME)
+        values (#{id,jdbcType=DECIMAL}, #{apiName,jdbcType=VARCHAR}, #{requestMethod,jdbcType=VARCHAR},
+        #{requestUrl,jdbcType=VARCHAR}, #{requestIp,jdbcType=VARCHAR}, #{requestTime,jdbcType=TIMESTAMP},
+        #{requestStatusCode,jdbcType=DECIMAL}, #{requestParams,jdbcType=VARCHAR},
+        #{requestResult,jdbcType=VARCHAR},
+        #{errorMsg,jdbcType=VARCHAR}, #{logLevel,jdbcType=VARCHAR}, #{userId,jdbcType=DECIMAL},
+        #{userName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.RuiLing.TMS.entity.TInterfaceHistory">
+        <!--@mbg.generated-->
+        update T_INTERFACE_HISTORY
+        <set>
+            <if test="apiName != null">
+                API_NAME = #{apiName,jdbcType=VARCHAR},
+            </if>
+            <if test="requestMethod != null">
+                REQUEST_METHOD = #{requestMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="requestUrl != null">
+                REQUEST_URL = #{requestUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="requestIp != null">
+                REQUEST_IP = #{requestIp,jdbcType=VARCHAR},
+            </if>
+            <if test="requestTime != null">
+                REQUEST_TIME = #{requestTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="requestStatusCode != null">
+                REQUEST_STATUS_CODE = #{requestStatusCode,jdbcType=DECIMAL},
+            </if>
+            <if test="requestParams != null">
+                REQUEST_PARAMS = #{requestParams,jdbcType=VARCHAR},
+            </if>
+            <if test="requestResult != null">
+                REQUEST_RESULT = #{requestResult,jdbcType=VARCHAR},
+            </if>
+            <if test="errorMsg != null">
+                ERROR_MSG = #{errorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="logLevel != null">
+                LOG_LEVEL = #{logLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=DECIMAL},
+            </if>
+            <if test="userName != null">
+                USER_NAME = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.RuiLing.TMS.entity.TInterfaceHistory">
+        <!--@mbg.generated-->
+        update T_INTERFACE_HISTORY
+        set API_NAME            = #{apiName,jdbcType=VARCHAR},
+            REQUEST_METHOD      = #{requestMethod,jdbcType=VARCHAR},
+            REQUEST_URL         = #{requestUrl,jdbcType=VARCHAR},
+            REQUEST_IP          = #{requestIp,jdbcType=VARCHAR},
+            REQUEST_TIME        = #{requestTime,jdbcType=TIMESTAMP},
+            REQUEST_STATUS_CODE = #{requestStatusCode,jdbcType=DECIMAL},
+            REQUEST_PARAMS      = #{requestParams,jdbcType=VARCHAR},
+            REQUEST_RESULT      = #{requestResult,jdbcType=VARCHAR},
+            ERROR_MSG           = #{errorMsg,jdbcType=VARCHAR},
+            LOG_LEVEL           = #{logLevel,jdbcType=VARCHAR},
+            USER_ID             = #{userId,jdbcType=DECIMAL},
+            USER_NAME           = #{userName,jdbcType=VARCHAR},
+            CREATE_TIME         = #{createTime,jdbcType=TIMESTAMP}
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.RuiLing.TMS.mapper.TCarProductMapper">
+    <delete id="deleteCarProduct">
+        <!--@mbg.generated-->
+        delete
+        from T_CAR_PRODUCT where ID in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id,jdbcType=DECIMAL}
+        </foreach>
+    </delete>
+    <!--  增-->
+    <insert id="insertCarProduct" parameterType="com.RuiLing.TMS.entity.TCarProduct">
+        <!--@mbg.generated-->
+        insert into T_CAR_PRODUCT
+        (ID, "NO", TRANSFER_TYPE_CODE, PACKMAGING_ID, "STATUS", PACKMAGING_TIME, PACKMAGING_ACTUL_TIME, REC_CREATE_TIME,
+         REC_CREATOR, VERSION)
+        values (#{id,jdbcType=DECIMAL}, #{no,jdbcType=VARCHAR}, #{transferTypeCode,jdbcType=VARCHAR},
+                #{packmagingId,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, #{packmagingTime,jdbcType=TIMESTAMP},
+                #{packmagingActualTime,jdbcType=TIMESTAMP}, sysdate, #{recCreator,jdbcType=VARCHAR}, 1)
+    </insert>
+    <update id="updateCarProduct" parameterType="com.RuiLing.TMS.entity.TCarProduct">
+        <!--@mbg.generated-->
+        update T_CAR_PRODUCT
+        set NO               = #{no,jdbcType=VARCHAR},
+            TRANSFER_TYPE_CODE = #{transferTypeCode,jdbcType=VARCHAR},
+            PACKMAGING_ID      = #{packmagingId,jdbcType=DECIMAL},
+            STATUS           = #{status,jdbcType=VARCHAR},
+        PACKMAGING_TIME       = #{packmagingTime,jdbcType=TIMESTAMP},
+        PACKMAGING_ACTUL_TIME = #{packmagingActualTime,jdbcType=TIMESTAMP},
+        REC_REVISOR_TIME      = sysdate,
+        REC_REVISOR           = #{recRevisor,jdbcType=VARCHAR},
+        VERSION               = VERSION + 1
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <!--  todo:初步添加查询功能，待后续修改-->
+    <select id="queryTCarProduct" resultType="java.util.LinkedHashMap">
+        SELECT id as "id", no as "no", TRANSFER_TYPE_CODE as "transferTypeCode", packmaging_id as "packmagingId", status as "status",
+            to_char(packmaging_time,'yyyy-MM-dd') as "packmagingTime", to_char(packmaging_actul_time,'yyyy-MM-dd')   as "packmagingActualTime", rec_create_time as "recCreateTime",
+            rec_creator as "recCreator", rec_revisor_time as "recRevisorTime", rec_revisor as "recRevisor", version as "version"
+        FROM t_car_product
+    </select>
+</mapper>

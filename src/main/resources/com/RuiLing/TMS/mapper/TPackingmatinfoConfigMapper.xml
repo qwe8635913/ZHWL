@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.RuiLing.TMS.mapper.TPackingmatinfoConfigMapper">
+  <resultMap id="BaseResultMap" type="com.RuiLing.TMS.entity.TPackingmatinfoConfig">
+    <!--@mbg.generated-->
+    <!--@Table T_PACKINGMATINFO_CONFIG-->
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="DRIVER" jdbcType="VARCHAR" property="driver" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="TRANSFER_TYPE_CODE" jdbcType="VARCHAR" property="transferTypeCode" />
+    <result column="PACKMAGING_ID" jdbcType="VARCHAR" property="packmagingId" />
+    <result column="REC_CREATE_TIME" jdbcType="TIMESTAMP" property="recCreateTime" />
+    <result column="REC_CREATOR" jdbcType="VARCHAR" property="recCreator" />
+    <result column="REC_REVISOR" jdbcType="VARCHAR" property="recRevisor" />
+    <result column="REC_REVISOR_TIME" jdbcType="TIMESTAMP" property="recRevisorTime" />
+    <result column="VERSION" jdbcType="VARCHAR" property="version" />
+    <result column="EMPTY_WGT" jdbcType="VARCHAR" property="emptyWgt" />
+    <result column="SFZ_CODE" jdbcType="VARCHAR" property="sfzCode" />
+    <result column="DRIVER_END_TIME" jdbcType="VARCHAR" property="driverEndTime" />
+    <result column="SFZ_IMAGE_URL" jdbcType="VARCHAR" property="sfzImageUrl" />
+    <result column="DRIVE_IMAGE_URL" jdbcType="VARCHAR" property="driveImageUrl" />
+    <result column="DRIVING_IMAGE_URL" jdbcType="VARCHAR" property="drivingImageUrl" />
+    <result column="CAR_IMAGE_URL" jdbcType="VARCHAR" property="carImageUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID as "id", DRIVER as "driver", PHONE as "phone", TRANSFER_TYPE_CODE  as "transferTypeCode",decode(TRANSFER_TYPE_CODE, 21, '汽运', 22, '铁运',23,'水运','')   as "transferTypeDesc", PACKMAGING_ID as "packmagingId", REC_CREATE_TIME as "recCreateTime", REC_CREATOR as "recCreator",
+    REC_REVISOR as "recRevisor", REC_REVISOR_TIME as "recRevisorTime", VERSION as "version", EMPTY_WGT as "emptyWgt", SFZ_CODE as "sfzCode", DRIVER_END_TIME as "driverEndTime", SFZ_IMAGE_URL as "sfzImageUrl",
+    DRIVE_IMAGE_URL as "driveImageUrl", DRIVING_IMAGE_URL as "drivingImageUrl", CAR_IMAGE_URL as "carImageUrl"
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from T_PACKINGMATINFO_CONFIG
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="packingMatinfoSelect" parameterType="com.RuiLing.TMS.vo.PackingMatinVo" resultType="java.util.LinkedHashMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from T_PACKINGMATINFO_CONFIG
+    where 1 = 1
+    <if test="driver != null and driver != ''">
+      AND DRIVER LIKE '%' || #{driver} || '%'
+    </if>
+    <if test="phone != null">
+      PHONE = #{phone,jdbcType=VARCHAR},
+    </if>
+    <if test="transferTypeCode != null">
+      TRANSFER_TYPE_CODE = #{transferTypeCode,jdbcType=VARCHAR},
+    </if>
+    <if test="packmagingId != null">
+      PACKMAGING_ID = #{packmagingId,jdbcType=VARCHAR},
+    </if>
+    <if test="recCreateTime != null">
+      REC_CREATE_TIME = #{recCreateTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="recCreator != null">
+      REC_CREATOR = #{recCreator,jdbcType=VARCHAR},
+    </if>
+    <if test="recRevisor != null">
+      REC_REVISOR = #{recRevisor,jdbcType=VARCHAR},
+    </if>
+    <if test="recRevisorTime != null">
+      REC_REVISOR_TIME = #{recRevisorTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="version != null">
+      VERSION = #{version,jdbcType=VARCHAR},
+    </if>
+    <if test="emptyWgt != null">
+      EMPTY_WGT = #{emptyWgt,jdbcType=VARCHAR},
+    </if>
+    <if test="sfzCode != null">
+      SFZ_CODE = #{sfzCode,jdbcType=VARCHAR},
+    </if>
+    <if test="driverEndTime != null">
+      DRIVER_END_TIME = #{driverEndTime,jdbcType=VARCHAR},
+    </if>
+    <if test="sfzImageUrl != null">
+      SFZ_IMAGE_URL = #{sfzImageUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="driveImageUrl != null">
+      DRIVE_IMAGE_URL = #{driveImageUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="drivingImageUrl != null">
+      DRIVING_IMAGE_URL = #{drivingImageUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="carImageUrl != null">
+      CAR_IMAGE_URL = #{carImageUrl,jdbcType=VARCHAR},
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from T_PACKINGMATINFO_CONFIG
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deletePackingmatin">
+    DELETE FROM T_PACKINGMATINFO_CONFIG
+    WHERE ID IN
+    <foreach item="id" collection="array" open="(" separator="," close=")">
+      #{id,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+
+  <insert id="insert" parameterType="com.RuiLing.TMS.entity.TPackingmatinfoConfig">
+    <!--@mbg.generated-->
+    insert into T_PACKINGMATINFO_CONFIG (ID, DRIVER, PHONE, 
+      TRANSFER_TYPE_CODE, PACKMAGING_ID, REC_CREATE_TIME, 
+      REC_CREATOR, REC_REVISOR, REC_REVISOR_TIME, 
+      VERSION, EMPTY_WGT, SFZ_CODE, 
+      DRIVER_END_TIME, SFZ_IMAGE_URL, DRIVE_IMAGE_URL, 
+      DRIVING_IMAGE_URL, CAR_IMAGE_URL)
+    values (#{id,jdbcType=BIGINT}, #{driver,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+      #{transferTypeCode,jdbcType=VARCHAR}, #{packmagingId,jdbcType=VARCHAR}, #{recCreateTime,jdbcType=TIMESTAMP}, 
+      #{recCreator,jdbcType=VARCHAR}, #{recRevisor,jdbcType=VARCHAR}, #{recRevisorTime,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=VARCHAR}, #{emptyWgt,jdbcType=VARCHAR}, #{sfzCode,jdbcType=VARCHAR}, 
+      #{driverEndTime,jdbcType=TIMESTAMP}, #{sfzImageUrl,jdbcType=VARCHAR}, #{driveImageUrl,jdbcType=VARCHAR}, 
+      #{drivingImageUrl,jdbcType=VARCHAR}, #{carImageUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.RuiLing.TMS.entity.TPackingmatinfoConfig">
+    <!--@mbg.generated-->
+    insert into T_PACKINGMATINFO_CONFIG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="driver != null">
+        DRIVER,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="transferTypeCode != null">
+        TRANSFER_TYPE_CODE,
+      </if>
+      <if test="packmagingId != null">
+        PACKMAGING_ID,
+      </if>
+
+        REC_CREATE_TIME,
+
+        REC_CREATOR,
+
+      <if test="recRevisor != null">
+        REC_REVISOR,
+      </if>
+      <if test="recRevisorTime != null">
+        REC_REVISOR_TIME,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="emptyWgt != null">
+        EMPTY_WGT,
+      </if>
+      <if test="sfzCode != null">
+        SFZ_CODE,
+      </if>
+      <if test="driverEndTime != null">
+        DRIVER_END_TIME,
+      </if>
+      <if test="sfzImageUrl != null">
+        SFZ_IMAGE_URL,
+      </if>
+      <if test="driveImageUrl != null">
+        DRIVE_IMAGE_URL,
+      </if>
+      <if test="drivingImageUrl != null">
+        DRIVING_IMAGE_URL,
+      </if>
+      <if test="carImageUrl != null">
+        CAR_IMAGE_URL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="driver != null">
+        #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="transferTypeCode != null">
+        #{transferTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="packmagingId != null">
+        #{packmagingId,jdbcType=VARCHAR},
+      </if>
+
+        sysdate,
+
+      <if test="recCreator != null">
+        #{recCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="recRevisor != null">
+        #{recRevisor,jdbcType=VARCHAR},
+      </if>
+      <if test="recRevisorTime != null">
+        #{recRevisorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="1==1">
+        1,
+      </if>
+      <if test="emptyWgt != null">
+        #{emptyWgt,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzCode != null">
+        #{sfzCode,jdbcType=VARCHAR},
+      </if>
+      <if test="driverEndTime != null">
+        #{driverEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sfzImageUrl != null">
+        #{sfzImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="driveImageUrl != null">
+        #{driveImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="drivingImageUrl != null">
+        #{drivingImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="carImageUrl != null">
+        #{carImageUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.RuiLing.TMS.entity.TPackingmatinfoConfig">
+    <!--@mbg.generated-->
+    update T_PACKINGMATINFO_CONFIG
+    <set>
+      <if test="driver != null">
+        DRIVER = #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="transferTypeCode != null">
+        TRANSFER_TYPE_CODE = #{transferTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="packmagingId != null">
+        PACKMAGING_ID = #{packmagingId,jdbcType=VARCHAR},
+      </if>
+      <if test="recCreateTime != null">
+        REC_CREATE_TIME = #{recCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recCreator != null">
+        REC_CREATOR = #{recCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="recRevisor != null">
+        REC_REVISOR = #{recRevisor,jdbcType=VARCHAR},
+      </if>
+
+      REC_REVISOR_TIME =  sysdate,
+
+      <if test="1==1">
+        VERSION = VERSION+1,
+      </if>
+      <if test="emptyWgt != null">
+        EMPTY_WGT = #{emptyWgt,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzCode != null">
+        SFZ_CODE = #{sfzCode,jdbcType=VARCHAR},
+      </if>
+      <if test="driverEndTime != null">
+        DRIVER_END_TIME = #{driverEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzImageUrl != null">
+        SFZ_IMAGE_URL = #{sfzImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="driveImageUrl != null">
+        DRIVE_IMAGE_URL = #{driveImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="drivingImageUrl != null">
+        DRIVING_IMAGE_URL = #{drivingImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="carImageUrl != null">
+        CAR_IMAGE_URL = #{carImageUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.RuiLing.TMS.entity.TPackingmatinfoConfig">
+    <!--@mbg.generated-->
+    update T_PACKINGMATINFO_CONFIG
+    set DRIVER = #{driver,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      TRANSFER_TYPE_CODE = #{transferTypeCode,jdbcType=VARCHAR},
+      PACKMAGING_ID = #{packmagingId,jdbcType=VARCHAR},
+      REC_CREATE_TIME = #{recCreateTime,jdbcType=TIMESTAMP},
+      REC_CREATOR = #{recCreator,jdbcType=VARCHAR},
+      REC_REVISOR = #{recRevisor,jdbcType=VARCHAR},
+      REC_REVISOR_TIME = #{recRevisorTime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=VARCHAR},
+      EMPTY_WGT = #{emptyWgt,jdbcType=VARCHAR},
+      SFZ_CODE = #{sfzCode,jdbcType=VARCHAR},
+      DRIVER_END_TIME = #{driverEndTime,jdbcType=VARCHAR},
+      SFZ_IMAGE_URL = #{sfzImageUrl,jdbcType=VARCHAR},
+      DRIVE_IMAGE_URL = #{driveImageUrl,jdbcType=VARCHAR},
+      DRIVING_IMAGE_URL = #{drivingImageUrl,jdbcType=VARCHAR},
+      CAR_IMAGE_URL = #{carImageUrl,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.RuiLing.TMS.mapper.TGpsRailMapper">
+    <resultMap id="BaseResultMap" type="com.RuiLing.TMS.entity.TGpsRail">
+        <!--@mbg.generated-->
+        <!--@Table T_GPS_Rail-->
+        <id column="rail_id" jdbcType="DECIMAL" property="railId"/>
+        <result column="rail_dimensionality" jdbcType="DECIMAL" property="railDimensionality"/>
+        <result column="rail_longitude" jdbcType="DECIMAL" property="railLongitude"/>
+        <result column="rail_name" jdbcType="VARCHAR" property="railName"/>
+        <result column="rail_radius" jdbcType="VARCHAR" property="railRadius"/>
+        <result column="rail_message" jdbcType="VARCHAR" property="railMessage"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="rail_state" jdbcType="DECIMAL" property="railState"/>
+        <result column="rail_type" jdbcType="DECIMAL" property="railType"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        rail_id             "railId",
+        rail_dimensionality "railDimensionality",
+        rail_longitude      "railLongitude",
+        rail_name           "railName",
+        rail_radius         "railRadius",
+        rail_message        "railMessage",
+        update_time         "updateTime",
+        create_time         "createTime",
+        rail_state          "railState",
+        rail_type           "railType"
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from T_GPS_Rail
+        where rail_id = #{railId,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+        <!--@mbg.generated-->
+        delete
+        from T_GPS_Rail
+        where rail_id = #{railId,jdbcType=BIGINT}
+    </delete>
+    <!--    根据ID删除-->
+    <delete id="deleteGpsRail">
+        delete
+        from T_GPS_Rail
+        where rail_id  IN <!--<foreach:增强for, item:遍历的结果，collection：集合类型,open:拼接“(”-->
+        <foreach item="id" collection="railId" open="(" separator="," close=")"><!--separator:循环的分隔符-->
+            #{id,jdbcType=VARCHAR}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.RuiLing.TMS.entity.TGpsRail">
+        <!--@mbg.generated-->
+        insert into T_GPS_Rail (rail_id, rail_dimensionality, rail_longitude,
+                                rail_name, rail_radius, rail_message,
+                                update_time, create_time, rail_state,
+                                rail_type)
+        values (#{railId,jdbcType=DECIMAL}, #{railDimensionality,jdbcType=DECIMAL}, #{railLongitude,jdbcType=DECIMAL},
+                #{railName,jdbcType=VARCHAR}, #{railRadius,jdbcType=VARCHAR}, #{railMessage,jdbcType=VARCHAR},
+                #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{railState,jdbcType=DECIMAL},
+                #{railType,jdbcType=DECIMAL})
+    </insert>
+    <insert id="insertSelective" parameterType="com.RuiLing.TMS.entity.TGpsRail">
+        <!--@mbg.generated-->
+        insert into T_GPS_Rail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="railId != null">
+                rail_id,
+            </if>
+            <if test="railDimensionality != null">
+                rail_dimensionality,
+            </if>
+            <if test="railLongitude != null">
+                rail_longitude,
+            </if>
+            <if test="railName != null">
+                rail_name,
+            </if>
+            <if test="railRadius != null">
+                rail_radius,
+            </if>
+            <if test="railMessage != null">
+                rail_message,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="railState != null">
+                rail_state,
+            </if>
+            <if test="railType != null">
+                rail_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="railId != null">
+                #{railId,jdbcType=DECIMAL},
+            </if>
+            <if test="railDimensionality != null">
+                #{railDimensionality,jdbcType=DECIMAL},
+            </if>
+            <if test="railLongitude != null">
+                #{railLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="railName != null">
+                #{railName,jdbcType=VARCHAR},
+            </if>
+            <if test="railRadius != null">
+                #{railRadius,jdbcType=VARCHAR},
+            </if>
+            <if test="railMessage != null">
+                #{railMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="railState != null">
+                #{railState,jdbcType=DECIMAL},
+            </if>
+            <if test="railType != null">
+                #{railType,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+    <!--    新增JPS  -->
+    <insert id="insertGpsResult">
+        insert into T_GPS_Rail (rail_id, rail_dimensionality, rail_longitude,
+                                rail_name, rail_radius, rail_message,
+                                update_time, create_time, rail_state,
+                                rail_type)
+        values (#{railId,jdbcType=DECIMAL}, #{railDimensionality,jdbcType=DECIMAL}, #{railLongitude,jdbcType=DECIMAL},
+                #{railName,jdbcType=VARCHAR}, #{railRadius,jdbcType=VARCHAR}, #{railMessage,jdbcType=VARCHAR},
+                sysdate, sysdate, #{railState,jdbcType=DECIMAL},
+                #{railType,jdbcType=DECIMAL})
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.RuiLing.TMS.entity.TGpsRail">
+        <!--@mbg.generated-->
+        update T_GPS_Rail
+        <set>
+            <if test="railDimensionality != null">
+                rail_dimensionality = #{railDimensionality,jdbcType=DECIMAL},
+            </if>
+            <if test="railLongitude != null">
+                rail_longitude = #{railLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="railName != null">
+                rail_name = #{railName,jdbcType=VARCHAR},
+            </if>
+            <if test="railRadius != null">
+                rail_radius = #{railRadius,jdbcType=VARCHAR},
+            </if>
+            <if test="railMessage != null">
+                rail_message = #{railMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="railState != null">
+                rail_state = #{railState,jdbcType=DECIMAL},
+            </if>
+            <if test="railType != null">
+                rail_type = #{railType,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where rail_id = #{railId,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.RuiLing.TMS.entity.TGpsRail">
+        <!--@mbg.generated-->
+        update T_GPS_Rail
+        set rail_dimensionality = #{railDimensionality,jdbcType=DECIMAL},
+            rail_longitude      = #{railLongitude,jdbcType=DECIMAL},
+            rail_name           = #{railName,jdbcType=VARCHAR},
+            rail_radius         = #{railRadius,jdbcType=VARCHAR},
+            rail_message        = #{railMessage,jdbcType=VARCHAR},
+            update_time         = #{updateTime,jdbcType=TIMESTAMP},
+            create_time         = #{createTime,jdbcType=TIMESTAMP},
+            rail_state          = #{railState,jdbcType=DECIMAL},
+            rail_type           = #{railType,jdbcType=DECIMAL}
+        where rail_id = #{railId,jdbcType=DECIMAL}
+    </update>
+    <!--    编辑GPS-->
+    <update id="updateGpsRail">
+        update T_GPS_Rail
+        set rail_dimensionality = #{railDimensionality,jdbcType=DECIMAL},
+            rail_longitude      = #{railLongitude,jdbcType=DECIMAL},
+            rail_name           = #{railName,jdbcType=VARCHAR},
+            rail_radius         = #{railRadius,jdbcType=VARCHAR},
+            rail_message        = #{railMessage,jdbcType=VARCHAR},
+            update_time         = sysdate,
+            rail_state          = #{railState,jdbcType=DECIMAL},
+            rail_type           = #{railType,jdbcType=DECIMAL}
+        where rail_id = #{railId,jdbcType=DECIMAL}
+    </update>
+
+    <!--  根据参数查询全部-->
+    <select id="queryGpsRail" resultType="java.util.LinkedHashMap">
+        select
+        <include refid="Base_Column_List"/>
+        from T_GPS_Rail
+    </select>
+</mapper>

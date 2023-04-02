@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.RuiLing.TMS.mapper.TShipTrajectoryMapper">
+  <resultMap id="BaseResultMap" type="com.RuiLing.TMS.entity.TShipTrajectory">
+    <!--@mbg.generated-->
+    <!--@Table T_SHIP_TRAJECTORY-->
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="SHIPID" jdbcType="DECIMAL" property="shipid" />
+    <result column="REC_CREATE_TIME" jdbcType="TIMESTAMP" property="recCreateTime" />
+    <result column="REC_CREATOR" jdbcType="VARCHAR" property="recCreator" />
+    <result column="REC_REVISOR" jdbcType="VARCHAR" property="recRevisor" />
+    <result column="REC_REVISOR_TIME" jdbcType="TIMESTAMP" property="recRevisorTime" />
+    <result column="LON" jdbcType="DECIMAL" property="lon" />
+    <result column="LAT" jdbcType="DECIMAL" property="lat" />
+    <result column="SOG" jdbcType="DECIMAL" property="sog" />
+    <result column="COG" jdbcType="VARCHAR" property="cog" />
+    <result column="LAST_TIME" jdbcType="TIMESTAMP" property="lastTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID as "id" , "NAME" as "name", SHIPID as "shipid", REC_CREATE_TIME, REC_CREATOR, REC_REVISOR, REC_REVISOR_TIME,
+    LON as "lon", LAT as "lat", SOG as "sog", COG as "cog" ,TO_CHAR(LAST_TIME,'yyyy/MM/dd hh24:mi:ss') as "lastTime"
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from T_SHIP_TRAJECTORY
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <select id="shipTrajectorySelect" parameterType="com.RuiLing.TMS.vo.ShipTrajectoryVo" resultType="java.util.LinkedHashMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from T_SHIP_TRAJECTORY
+    where 1 = 1
+    <if test="name != null and name != ''">
+      AND NAME LIKE '%' || #{name} || '%'
+    </if>
+    <if test="shipid != null">
+      SHIPID = #{shipid,jdbcType=VARCHAR},
+    </if>
+    <if test="lon != null">
+      LON = #{lon,jdbcType=VARCHAR},
+    </if>
+    <if test="lat != null">
+      LAT = #{lat,jdbcType=VARCHAR},
+    </if>
+    <if test="recCreateTime != null">
+      REC_CREATE_TIME = #{recCreateTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="recCreator != null">
+      REC_CREATOR = #{recCreator,jdbcType=VARCHAR},
+    </if>
+    <if test="recRevisor != null">
+      REC_REVISOR = #{recRevisor,jdbcType=VARCHAR},
+    </if>
+    <if test="recRevisorTime != null">
+      REC_REVISOR_TIME = #{recRevisorTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="sog != null">
+      SOG = #{sog,jdbcType=VARCHAR},
+    </if>
+    <if test="cog != null">
+      COG = #{cog,jdbcType=VARCHAR},
+    </if>
+    <if test="lastTime != null">
+      LAST_TIME = #{lastTime,jdbcType=VARCHAR},
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    <!--@mbg.generated-->
+    delete from T_SHIP_TRAJECTORY
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.RuiLing.TMS.entity.TShipTrajectory">
+    <!--@mbg.generated-->
+    insert into T_SHIP_TRAJECTORY (ID, "NAME", SHIPID, 
+      REC_CREATE_TIME, REC_CREATOR, REC_REVISOR, 
+      REC_REVISOR_TIME, LON, LAT, 
+      SOG, COG)
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{shipid,jdbcType=DECIMAL}, 
+      #{recCreateTime,jdbcType=TIMESTAMP}, #{recCreator,jdbcType=VARCHAR}, #{recRevisor,jdbcType=VARCHAR}, 
+      #{recRevisorTime,jdbcType=TIMESTAMP}, #{lon,jdbcType=DECIMAL}, #{lat,jdbcType=DECIMAL}, 
+      #{sog,jdbcType=DECIMAL}, #{cog,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.RuiLing.TMS.entity.TShipTrajectory">
+    <!--@mbg.generated-->
+    insert into T_SHIP_TRAJECTORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        "NAME",
+      </if>
+      <if test="shipid != null">
+        SHIPID,
+      </if>
+        REC_CREATE_TIME,
+        REC_CREATOR,
+      <if test="recRevisor != null">
+        REC_REVISOR,
+      </if>
+      <if test="recRevisorTime != null">
+        REC_REVISOR_TIME,
+      </if>
+      <if test="lon != null">
+        LON,
+      </if>
+      <if test="lat != null">
+        LAT,
+      </if>
+      <if test="sog != null">
+        SOG,
+      </if>
+      <if test="cog != null">
+        COG,
+      </if>
+      <if test="lastTime != null">
+        LAST_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shipid != null">
+        #{shipid,jdbcType=DECIMAL},
+      </if>
+      sysdate,
+      <if test="recCreator != null">
+        #{recCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="recRevisor != null">
+        #{recRevisor,jdbcType=VARCHAR},
+      </if>
+      <if test="recRevisorTime != null">
+        #{recRevisorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lon != null">
+        #{lon,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="sog != null">
+        #{sog,jdbcType=DECIMAL},
+      </if>
+      <if test="cog != null">
+        #{cog,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null">
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.RuiLing.TMS.entity.TShipTrajectory">
+    <!--@mbg.generated-->
+    update T_SHIP_TRAJECTORY
+    <set>
+      <if test="name != null">
+        "NAME" = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shipid != null">
+        SHIPID = #{shipid,jdbcType=DECIMAL},
+      </if>
+      <if test="recCreateTime != null">
+        REC_CREATE_TIME = #{recCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recCreator != null">
+        REC_CREATOR = #{recCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="recRevisor != null">
+        REC_REVISOR = #{recRevisor,jdbcType=VARCHAR},
+      </if>
+      <if test="recRevisorTime != null">
+        REC_REVISOR_TIME = #{recRevisorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lon != null">
+        LON = #{lon,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null">
+        LAT = #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="sog != null">
+        SOG = #{sog,jdbcType=DECIMAL},
+      </if>
+      <if test="cog != null">
+        COG = #{cog,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.RuiLing.TMS.entity.TShipTrajectory">
+    <!--@mbg.generated-->
+    update T_SHIP_TRAJECTORY
+    set "NAME" = #{name,jdbcType=VARCHAR},
+      SHIPID = #{shipid,jdbcType=DECIMAL},
+      REC_CREATE_TIME = #{recCreateTime,jdbcType=TIMESTAMP},
+      REC_CREATOR = #{recCreator,jdbcType=VARCHAR},
+      REC_REVISOR = #{recRevisor,jdbcType=VARCHAR},
+      REC_REVISOR_TIME = #{recRevisorTime,jdbcType=TIMESTAMP},
+      LON = #{lon,jdbcType=DECIMAL},
+      LAT = #{lat,jdbcType=DECIMAL},
+      SOG = #{sog,jdbcType=DECIMAL},
+      COG = #{cog,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>
